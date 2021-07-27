@@ -18,10 +18,10 @@ let pokemonList = [
   }
 ];
 
-for (let i = 0; i < pokemonList.length; i++) {
-  if (pokemonList[i].height < 0.6) {
-    document.write(`<p>${pokemonList[i].name} (height: ${pokemonList[i].height}) - I am a small Pokémon</p>`);
+pokemonList.forEach(function(pokemon) {
+  if (pokemon.type.includes('poison')) {
+    document.write(`<p>${pokemon.name} (height: ${pokemon.height}) - Beware I am a poisonous Pokémon</p>`);
   } else {
-    document.write(`<p>${pokemonList[i].name} (height: ${pokemonList[i].height})</p>`);
+    document.write(`<p>${pokemon.name} (height: ${pokemon.height})<p>`);
   }
-}
+});
