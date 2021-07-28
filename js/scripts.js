@@ -24,31 +24,38 @@ let pokemonRepository = (function() {
   }
 
   function add(pokemon) {
-    if (typeof pokemon === 'object' && Object.keys(pokemon) === 'name', 'type', 'height') {
+    if (typeof pokemon === 'object' && Object.keys(pokemon).includes('name') && Object.keys(pokemon).includes('type') && Object.keys(pokemon).includes('height')) {
       pokemonList.push(pokemon);
     }
+  }
+
+  // Function to create a list of Pokémons
+  function addListItem(pokemon) {
+    let list = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button')
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    listItem.appendChild(button);
+    list.appendChild(listItem);
+    // Printing the Pokémons name to console when clicked
+    button.addEventListener('click', function (event) {
+      showDetails(pokemon);
+    });
+  }
+  // Fucntion created for eventListener
+  function showDetails(pokemon) {
+    console.log(pokemon.name);
   }
 
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem
   };
 }) ();
 
-// Adding an item, which fullfill the criteria
-pokemonRepository.add({name: 'Pikachu', type: ['electric'], height: 0.4});
-
-// Adding an item, which does not fulfill the criterie of beeing an object
-pokemonRepository.add('name: Pikachu, type: ["electric"], height: 0.4');
-
-// Adding an item, which fullfill the criteria of beeing an object but not fullfilling the keys criteria
-pokemonRepository.add({country: 'Germany', city: 'Berlin', type: 'capital city'});
-
-// Prints the list with Pokémons, which are returned by the getAll()-function
+// Prints the list with Pokémons
 pokemonRepository.getAll().forEach(function(pokemon) {
-  if (pokemon.type.includes('poison')) {
-    document.write(`<p>${pokemon.name} (height: ${pokemon.height}) - Beware I am a poisonous Pokémon</p>`);
-  } else {
-    document.write(`<p>${pokemon.name} (height: ${pokemon.height})<p>`);
-  }
+  pokemonRepository.addListItem(pokemon);
 });
