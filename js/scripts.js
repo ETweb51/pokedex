@@ -37,11 +37,11 @@ let pokemonRepository = (function () {
     button.innerText = pokemon.name.toUpperCase();
     button.classList.add('btn-list');
     button.setAttribute('data-target', '#pokeModal');
-   	button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-toggle', 'modal');
     listItem.appendChild(button);
     list.appendChild(listItem);
     // Printing the Pokémons name to console when clicked
-    button.addEventListener('click', function (event) {
+    button.addEventListener('click', function () {
       console.log(pokemon);
       showDetails(pokemon);
     });
